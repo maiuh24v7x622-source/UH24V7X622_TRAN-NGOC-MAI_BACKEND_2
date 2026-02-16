@@ -45,6 +45,7 @@ class ContactService {
 
   async update(id, payload) {
     if (!ObjectId.isValid(id)) return null;
+<<<<<<< HEAD
 
     const filter = { _id: new ObjectId(id) };
     const update = this.extractContactData(payload);
@@ -57,25 +58,31 @@ class ContactService {
     const result = await this.contact.findOneAndUpdate(
       { _id: new ObjectId(id) },
 
+=======
+    const filter = { _id: new ObjectId(id) };
+    const update = this.extractContactData(payload);
+    return await this.contact.findOneAndUpdate(
+      filter,
+>>>>>>> 911ad9a (Xay dung ContactService thao tac MongoDB cho du an)
       { $set: update },
       { returnDocument: "after" },
     );
-
-    return result || null;
   }
 
   async delete(id) {
     if (!ObjectId.isValid(id)) return null;
+
 
     return await this.contact.findOneAndDelete({
 
 
     const result = await this.contact.findOneAndDelete({
 
+
+    return await this.contact.findOneAndDelete({
+
       _id: new ObjectId(id),
     });
-
-    return result;
   }
 
   async findFavorite() {
