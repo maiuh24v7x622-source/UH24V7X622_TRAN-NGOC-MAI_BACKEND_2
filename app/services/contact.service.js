@@ -45,26 +45,20 @@ class ContactService {
 
   async update(id, payload) {
     if (!ObjectId.isValid(id)) return null;
-
+    const filter = { _id: new ObjectId(id) };
     const update = this.extractContactData(payload);
-
-    const result = await this.contact.findOneAndUpdate(
-      { _id: new ObjectId(id) },
+    return await this.contact.findOneAndUpdate(
+      filter,
       { $set: update },
       { returnDocument: "after" },
     );
-
-    return result || null;
   }
 
   async delete(id) {
     if (!ObjectId.isValid(id)) return null;
-
-    const result = await this.contact.findOneAndDelete({
+    return await this.contact.findOneAndDelete({
       _id: new ObjectId(id),
     });
-
-    return result;
   }
 
   async findFavorite() {
